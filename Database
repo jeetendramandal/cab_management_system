@@ -1,0 +1,112 @@
+create database project;
+
+
+use project
+
+create table Admin(A_No varchar(20)primary key,A_Name text,A_Addr text,A_Phno text,A_login text,A_pass text);
+
+
+insert into Admin values('A100','akshay','Dehu Road, Pune',9960663216,'rohan','soni');
+
+
+insert into Admin values('A200','pritam','Shri Road, Pune',9960788987,'shri','Aniket');
+
+
+create table Cab(C_No varchar(20)primary key,C_Name text,C_cab int);
+
+
+insert into Cab values('MH 14 CA 1234','Indica',4); 
+
+
+insert into Cab values('MH 14 CA 1235','Indica',4); 
+
+
+insert into Cab values('MH 14 CA 1225','Toyota',6); 
+
+
+
+create table Employees(E_ID varchar(20)primary key,E_Name text,E_Addr text,E_Loc text,E_Phno text,E_Process text);
+
+insert into Employees values('E101','Rajesh','G. M. Road,Pune','Pune','9988053199','Del');
+
+
+insert into Employees values('E102','Raju','M. M. Road,Pune','Pune','9986753199','Del');
+
+
+
+create table Driver(D_No varchar(20)primary key,D_Name text,D_Addr text,Process text,D_Phno text,C_no varchar(20),foreign key(C_No)references Cab(C_No),Date_Join date);
+
+insert into Driver values('D101','Ramesh','M.G Road,Pune','Voice','9371053199','MH 14 CA 1234','2010/1/4');
+
+insert into Driver values('D102','Ramesh','M.G Road,Pune','Voice','9371053199','MH 14 CA 1234','2010/2/4');
+
+
+
+
+create table Security_Log(D_No varchar(20),D_Name text,C_No varchar(20),Date date,Time_In text,Time_Out text,Meter_In text,Meter_Out text,foreign key(D_No)references Driver(D_No),foreign key(C_No)references Cab(C_No));
+
+
+insert into Security_Log values('D101','Ramesh','MH 14 CA 1234','2011/1/15','10:54:4 AM','','123','');
+
+
+insert into Security_Log values('D103','Rahul','MH 14 CA 1238','2011/1/1','10:54:4 AM','','123','');
+
+
+create table Deleted_Driver(D_No varchar(20),D_Name text,D_Addr text,Process text,D_Phno text,C_no varchar(20),Date_Jion date,Date_left date,foreign key(D_No)references Driver(D_No),foreign key(C_No)references Cab(C_No));
+
+
+
+
+select * from Admin;
+
++------+----------+-----------------+------------+---------+--------+
+| A_No | A_Name   | A_Addr          | A_Phno     | A_login | A_pass |
++------+----------+-----------------+------------+---------+--------+
+| A100 | akshay   | Dehu Road, Pune | 9960663216 | rohan   | soni   | 
+| A200 | pritam   | Shri Road, Pune | 9960788987 | shri    | Aniket | 
++------+----------+-----------------+------------+---------+--------+
+
+select * from Cab;
+
++---------------+--------+-------+
+| C_No          | C_Name | C_cab |
++---------------+--------+-------+
+| MH 14 CA 1234 | Indica |     4 | 
+| MH 14 CA 1235 | Indica |     4 | 
+| MH 14 CA 1225 | Toyota |     6 | 
++---------------+--------+-------+
+3 rows in set (0.00 sec)
+
+
+select * from Security_Log;
+
++------+--------+---------------+------------+------------+----------+----------+-----------+
+| D_No | D_Name | C_No          | Date       | Time_In    | Time_Out | Meter_In | Meter_Out |
++------+--------+---------------+------------+------------+----------+----------+-----------+
+| D101 | Ramesh | MH 14 CA 1234 | 2011-01-15 | 10:54:4 AM |          | 123      |           | 
+| D103 | Rahul  | MH 14 CA 1238 | 2011-01-01 | 10:54:4 AM |          | 123      |           | 
++------+--------+---------------+------------+------------+----------+----------+-----------+
+2 rows in set (0.00 sec)
+
+
+
+select * from Driver;
+
++------+--------+---------------+---------+------------+---------------+------------+
+| D_No | D_Name | D_Addr        | Process | D_Phno     | C_no          | Date_Join  |
++------+--------+---------------+---------+------------+---------------+------------+
+| D101 | Ramesh | M.G Road,Pune | Voice   | 9371053199 | MH 14 CA 1234 | 2010-01-04 | 
+| D102 | Ramesh | M.G Road,Pune | Voice   | 9371053199 | MH 14 CA 1234 | 2010-02-04 | 
++------+--------+---------------+---------+------------+---------------+------------+
+
+
+select * from Employees;
+
++------+--------+-----------------+-------+------------+-----------+
+| E_ID | E_Name | E_Addr          | E_Loc | E_Phno     | E_Process |
++------+--------+-----------------+-------+------------+-----------+
+| E101 | Rajesh | G. M. Road,Pune | Pune  | 9988053199 | Del       | 
+| E102 | Raju   | M. M. Road,Pune | Pune  | 9986753199 | Del       | 
++------+--------+-----------------+-------+------------+-----------+
+2 rows in set (0.00 sec)
+
